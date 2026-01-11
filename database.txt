@@ -1,0 +1,7 @@
+password= zx1v4737j9
+host= sdb-83.hosting.stackcp.net
+username= great10-353039347820
+dbname= great10-353039347820
+
+
+#database space= 1024MB
