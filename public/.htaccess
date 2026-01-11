@@ -1,19 +1,25 @@
-Options -MultiViews
+Options +FollowSymLinks -Indexes
 RewriteEngine On
 
 # Handle Authorization Header
 RewriteCond %{HTTP:Authorization} ^(.*)
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%1]
 
-# Redirect Trailing Slashes
+# Redirect Trailing Slashes If Not A Folder...
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} (.+)/$
 RewriteRule ^ %1 [L,R=301]
 
-# Send Requests To Front Controller
+# Send Requests To Front Controller...
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [L]
+
+# Security: Don't expose .env and other sensitive files
+<Files ~ "^\.">
+    Order allow,deny
+    Deny from all
+</Files>
 
 # Security: Don't allow listing access
 Options -Indexes
